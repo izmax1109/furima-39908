@@ -1,57 +1,72 @@
 # README
 
-# README
-
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| name               | string | null: false |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| last_name          | string | null: false               |
+| first_name         | string | null: false               |
+| last_name_katakana | string | null: false               |
+| first_name_katakana| string | null: false               |
+| birth_day          | date   | null: false               |
 
 ### Association
 
-- has_many :room_users
-- has_many :rooms, through: :room_users
-- has_many :messages
+- has_many :items
+- has_many :records
 
-## rooms テーブル
 
-| Column | Type   | Options     |
-| ------ | ------ | ----------- |
-| name   | string | null: false |
+## items テーブル
 
-### Association
+| Column             | Type       | Options                             |
+| ------------------ | ----------------------------------------------   |
+| user               | references | null: false, foreign_key: true      |
+| commodity          | string     | null: false                         |
+| description        | text       | null: false                         |
+| category_id        | integer    | null: false,                        |
+| condition_id       | integer    | null: false,                        |
+| payer_id           | integer    | null: false,                        |
+| prefecture_id      | integer    | null: false,                        |
+| shipping_day_id    | integer    | null: false,                        |
+| price              | integer    | null: false                         |
 
-- has_many :room_users
-- has_many :users, through: :room_users
-- has_many :messages
-
-## room_users テーブル
-
-| Column | Type       | Options                        |
-| ------ | ---------- | ------------------------------ |
-| user   | references | null: false, foreign_key: true |
-| room   | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :room
 - belongs_to :user
+- has_one :record
 
-## messages テーブル
+## records テーブル
 
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| content | string     |                                |
-| user    | references | null: false, foreign_key: true |
-| room    | references | null: false, foreign_key: true |
+| Column              | Type    | Options                           |
+| ------------------- | ------------------------------------------- |
+| user                | references | null: false, foreign_key: true |
+| item                | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :room
 - belongs_to :user
+- belongs_to :item
+- has_one :address
+
+## addresses テーブル
+
+| Column              | Type       | Options                        |
+| ------------------- | ------------------------------------------- |
+| user                | references | null: false                    |
+| postal_code         | string     | null: false                    |
+| prefecture_id       | integer    | null: false                    |
+| city                | string     | null: false                    |
+| house_number        | string     | null: false                    |
+| bill_name           | string     |                                |
+| phone_number        | string     | null: false                    |
+
+### Association
+
+- belongs_to :record
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
