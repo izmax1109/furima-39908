@@ -25,12 +25,12 @@
 | ------------------ | ----------------------------------------------   |
 | user               | references | null: false, foreign_key: true      |
 | commodity          | string     | null: false                         |
-| description        | string     | null: false                         |
-| category           | id, name   | null: false, foreign_key: true      |
-| condition          | id, naem   | null: false, foreign_key: true      |
-| payer              | id, name   | null: false, foreign_key: true      |
-| region             | id, name   | null: false, foreign_key: true      |
-| shipping_day       | id, name   | null: false, foreign_key: true      |
+| description        | text       | null: false                         |
+| category_id        | integer    | null: false,                        |
+| condition_id       | integer    | null: false,                        |
+| payer_id           | integer    | null: false,                        |
+| region_id          | integer    | null: false,                        |
+| shipping_day_id    | integer    | null: false,                        |
 | price              | integer    | null: false                         |
 
 
@@ -54,11 +54,11 @@
 
 ## addresses テーブル
 
-| Column              | Type    | Options                           |
+| Column              | Type       | Options                        |
 | ------------------- | ------------------------------------------- |
 | user                | references | null: false                    |
 | postal_code         | string     | null: false                    |
-| prefecture          | id, name   | null: false, foreign_key: true |
+| prefecture_id       | integer    | null: false                    |
 | city                | string     | null: false                    |
 | house_number        | string     | null: false                    |
 | bill_name           | string     |                                |
