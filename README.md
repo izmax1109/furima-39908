@@ -3,12 +3,15 @@
 ## users テーブル
 
 | Column             | Type   | Options                   |
-| ------------------ | ------ | -----------               |
+| ------------------ | ------ | ------------------------- |
 | nickname           | string | null: false               |
 | email              | string | null: false, unique: true |
 | encrypted_password | string | null: false               |
-| full_name          | string | null: false               |
-| birth_day          | string | null: false               |
+| last_name          | string | null: false               |
+| first_name         | string | null: false               |
+| last_name_katakana | string | null: false               |
+| first_name_katakana| string | null: false               |
+| birth_day          | date   | null: false               |
 
 ### Association
 
@@ -21,15 +24,14 @@
 | Column             | Type       | Options                             |
 | ------------------ | ----------------------------------------------   |
 | user               | references | null: false, foreign_key: true      |
-| picture            | string     | null: false                         |
 | commodity          | string     | null: false                         |
 | description        | string     | null: false                         |
-| category           | string     | null: false                         |
-| condition          | string     | null: false                         |
-| payer              | string     | null: false                         |
-| region             | string     | null: false                         |
-| shipping_day       | string     | null: false                         |
-| price              | string     | null: false                         |
+| category           | id, name   | null: false, foreign_key: true      |
+| condition          | id, naem   | null: false, foreign_key: true      |
+| payer              | id, name   | null: false, foreign_key: true      |
+| region             | id, name   | null: false, foreign_key: true      |
+| shipping_day       | id, name   | null: false, foreign_key: true      |
+| price              | integer    | null: false                         |
 
 
 ### Association
@@ -54,12 +56,12 @@
 
 | Column              | Type    | Options                           |
 | ------------------- | ------------------------------------------- |
-| user                | references | null: false, foreign_key: true |
+| user                | references | null: false                    |
 | postal_code         | string     | null: false                    |
-| prefecture          | string     | null: false                    |
+| prefecture          | id, name   | null: false, foreign_key: true |
 | city                | string     | null: false                    |
 | house_number        | string     | null: false                    |
-| bill_name           | string     | null: false                    |
+| bill_name           | string     |                                |
 | phone_number        | string     | null: false                    |
 
 ### Association
