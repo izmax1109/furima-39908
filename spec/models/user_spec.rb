@@ -100,7 +100,7 @@ RSpec.describe User, type: :model do
       it 'first_nameに半角が含まれていると登録できない' do
         @user.first_name = 'suzuki'
         @user.valid?
-        expect(@user.errors.full_messages).to include('First name is invalid. Input full-width characters')
+        expect(@user.errors.full_messages).to include('FirstFirst name is invalid. Input full-width characters')
       end
 
       it 'last_name_katakanaが空では登録できない' do
