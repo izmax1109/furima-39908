@@ -10,7 +10,6 @@ class Item < ApplicationRecord
   belongs_to :region
   belongs_to :shipping_day
 
-  validates :title, :text, presence: true
   validates :category_id, :condition_id, :payer_id, :region_id, :shipping_day_id,
             numericality: { other_than: 1, message: "can't be blank" }
 
