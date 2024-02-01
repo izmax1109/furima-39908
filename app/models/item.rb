@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_day
 
   validates :image, :category, :condition, :payer, :region, :shipping_day, :price, presence: true
+  validates :commodity, :description, presence: { message: "can't be blank" }
   validates :category_id, :condition_id, :payer_id, :region_id, :shipping_day_id,
             numericality: { other_than: 1, message: "can't be blank" }
   validates :price, numericality: { only_integer: true, message: 'is not a number' }
