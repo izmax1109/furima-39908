@@ -1,13 +1,13 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
-  belongs_to :category
-  belongs_to :condition
-  belongs_to :payer
-  belongs_to :region
-  belongs_to :shipping_day
+  belongs_to_active_hash :category
+  belongs_to_active_hash :condition
+  belongs_to_active_hash :payer
+  belongs_to_active_hash :region
+  belongs_to_active_hash :shipping_day
 
-  validates :image, :category, :condition, :payer, :region, :shipping_day, :price, presence: true
+  validates :image, :category_id, :condition_id, :payer_id, :region_id, :shipping_day_id, :price, presence: true
   validates :commodity, :description, presence: { message: "can't be blank" }
   validates :category_id, :condition_id, :payer_id, :region_id, :shipping_day_id,
             numericality: { other_than: 1, message: "can't be blank" }
