@@ -38,31 +38,36 @@ RSpec.describe Item, type: :model do
       end
 
       it 'categoryが空では登録できない' do
-        @item.category = nil
+        category = Category.find(1)
+        @item.category = category
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
 
       it 'conditionが空では登録できない' do
-        @item.condition = nil
+        condition = Condition.find(1)
+        @item.condition = condition
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
 
       it 'payerが空では登録できない' do
-        @item.payer = nil
+        payer = Payer.find(1)
+        @item.payer = payer
         @item.valid?
         expect(@item.errors.full_messages).to include("Payer can't be blank")
       end
 
       it 'regionが空では登録できない' do
-        @item.region = nil
+        region = Region.find(1)
+        @item.region = region
         @item.valid?
         expect(@item.errors.full_messages).to include("Region can't be blank")
       end
 
       it 'shipping_dayが空では登録できない' do
-        @item.shipping_day = nil
+        shipping_day = ShippingDay.find(1)
+        @item.shipping_day = shipping_day
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping day can't be blank")
       end
