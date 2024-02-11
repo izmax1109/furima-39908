@@ -5,5 +5,4 @@ Rails.application.routes.draw do
 
   resources :users
   resources :items
-  resources :records, only: [:index, :create]
 end
