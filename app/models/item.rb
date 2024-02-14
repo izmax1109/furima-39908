@@ -16,4 +16,6 @@ class Item < ApplicationRecord
   validates :price, numericality: { less_than_or_equal_to: 9_999_999, message: 'must be less than or equal to 9,999,999' }
 
   has_one_attached :image
+  has_one :record
+  has_many :addresses
 end
