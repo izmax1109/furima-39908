@@ -1,5 +1,6 @@
 class RecordsController < ApplicationController
   before_action :set_current_item, only: [:index, :create]
+  before_action :check_login_and_item_owner, only: [:index]
 
   def index
     @record_address = RecordAddress.new
@@ -30,5 +31,14 @@ class RecordsController < ApplicationController
 
   def current_item_id
     @item.id
+  end
+
+  def check_login_and_item_owner
+    if user_signed_in?
+      @item = Item.find(params[:item_id])
+      redirect_to root_path if current_user == @item.user
+    else
+      redirect_to new_user_session_path
+    end
   end
 end
