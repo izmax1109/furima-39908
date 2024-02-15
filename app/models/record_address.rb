@@ -1,6 +1,6 @@
 class RecordAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :region_id, :city, :house_number, :building_name, :phone_number
+  attr_accessor :user_id, :item_id, :postal_code, :region_id, :city, :house_number, :building_name, :phone_number, :token
 
   with_options presence: true do
     validates :user_id
@@ -9,6 +9,7 @@ class RecordAddress
     validates :city, presence: true
     validates :house_number, presence: true
     validates :phone_number, presence: true, format: { with: /\A\d{10,11}\z/, message: 'input only correctly' }
+    validates :token
   end
   validates :region_id, numericality: { other_than: 1, message: 'Select' }
 

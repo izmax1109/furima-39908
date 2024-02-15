@@ -18,6 +18,12 @@ RSpec.describe RecordAddress, type: :model do
     end
 
     context '内容に問題がある時' do
+      it "tokenが空では登録できないこと" do
+        @record_address.token = nil
+        @record_address.valid?
+        expect(@record_address.errors.full_messages).to include("Token can't be blank")
+      end
+
       it 'postal_codeが空では保存できない' do
         @record_address.postal_code = ''
         @record_address.valid?
