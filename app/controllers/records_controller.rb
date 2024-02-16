@@ -13,7 +13,10 @@ class RecordsController < ApplicationController
     if @record_address.valid?
       pay_item
       @record_address.save
-      redirect_to root_path
+      unless @item.record.present?
+        redirect_to root_path
+        nil
+      end
     else
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       @item = Item.find(params[:item_id])
