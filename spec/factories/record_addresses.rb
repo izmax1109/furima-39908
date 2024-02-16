@@ -4,7 +4,8 @@ FactoryBot.define do
     region_id { 2 }
     city { '八千代市勝田台' }
     house_number { '7-10-8' }
+    building_name { '' }
     phone_number { '09092321082' }
-    token {"tok_abcdefghijk00000000000000000"}
+    token { 'tok_abcdefghijk00000000000000000' }
   end
 end

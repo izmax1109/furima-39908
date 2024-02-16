@@ -18,7 +18,7 @@ RSpec.describe RecordAddress, type: :model do
     end
 
     context '内容に問題がある時' do
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @record_address.token = nil
         @record_address.valid?
         expect(@record_address.errors.full_messages).to include("Token can't be blank")
@@ -62,6 +62,18 @@ RSpec.describe RecordAddress, type: :model do
 
       it 'phone_numberが正しい形式でないと保存できない' do
         @record_address.phone_number = '123-4567-8901'
+        @record_address.valid?
+        expect(@record_address.errors.full_messages).to include('Phone number input only correctly')
+      end
+
+      it 'phone_numberが9桁以下では保存できない' do
+        @record_address.phone_number = '123-456-890'
+        @record_address.valid?
+        expect(@record_address.errors.full_messages).to include('Phone number input only correctly')
+      end
+
+      it 'phone_numberが12桁以上では保存できない' do
+        @record_address.phone_number = '12345-6789-000'
         @record_address.valid?
         expect(@record_address.errors.full_messages).to include('Phone number input only correctly')
       end

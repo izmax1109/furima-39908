@@ -51,7 +51,7 @@ class ItemsController < ApplicationController
   end
 
   def require_owner
-    return if current_user == @item.user
+    return unless @item.record.present? || current_user != @item.user
 
     redirect_to root_path
   end

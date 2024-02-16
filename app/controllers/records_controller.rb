@@ -1,11 +1,10 @@
 class RecordsController < ApplicationController
   before_action :set_current_item, only: [:index, :create]
-  before_action :check_login_and_item_owner, only: [:index]
+  before_action :check_login_and_item_owner, only: [:index, :create]
 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @record_address = RecordAddress.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
@@ -19,7 +18,6 @@ class RecordsController < ApplicationController
       end
     else
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-      @item = Item.find(params[:item_id])
       render :index, status: :unprocessable_entity
     end
   end
@@ -37,7 +35,6 @@ class RecordsController < ApplicationController
 
   def pay_item
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-    Payjp.api_key = 'sk_test_8b19d3152655f7bdd1112d2f'
     Payjp::Charge.create(
       amount: @item.price,
       card: record_params[:token],
@@ -51,7 +48,6 @@ class RecordsController < ApplicationController
 
   def check_login_and_item_owner
     if user_signed_in?
-      @item = Item.find(params[:item_id])
       redirect_to root_path if current_user == @item.user
     else
       redirect_to new_user_session_path
