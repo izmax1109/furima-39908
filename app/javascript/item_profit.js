@@ -1,4 +1,4 @@
-document.addEventListener("turbo:load", () => {
+const price = () => {
   const priceInput = document.getElementById("item-price");
   if (priceInput) {
     priceInput.addEventListener("input", () => {
@@ -12,6 +12,10 @@ document.addEventListener("turbo:load", () => {
 
       const profitPrice = inputValue - taxPrice;
       profitDom.innerHTML = profitPrice;
+      console.log("OK");
     });
   }
-});
+};
+
+window.addEventListener("turbo:load", price);
+window.addEventListener("turbo:render", price);
