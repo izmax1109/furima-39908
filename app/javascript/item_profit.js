@@ -4,10 +4,14 @@ document.addEventListener("turbo:load", () => {
     priceInput.addEventListener("input", () => {
       const inputValue = priceInput.value;
 
+      const addTaxDom = document.getElementById("add-tax-price");
       const profitDom = document.getElementById("profit");
+
       const taxPrice = Math.floor(inputValue * 0.1);
+      addTaxDom.innerHTML = taxPrice;
+
       const profitPrice = inputValue - taxPrice;
-      profitDom.textContent = profitPrice;
+      profitDom.innerHTML = profitPrice;
     });
   }
 });
