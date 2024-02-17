@@ -13,7 +13,8 @@ class RecordsController < ApplicationController
       pay_item
       @record_address.save
 
-      redirect_to root_path
+      if @item.record.present?
+        redirect_to root_path
     else
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       render :index, status: :unprocessable_entity
