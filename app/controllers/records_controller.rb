@@ -12,11 +12,7 @@ class RecordsController < ApplicationController
     if @record_address.valid?
       pay_item
       @record_address.save
-
-      if @item.record.present?
-        redirect_to root_path
-        return # rubocop:disable Style/RedundantReturn
-      end
+      redirect_to root_path
     else
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       render :index, status: :unprocessable_entity
