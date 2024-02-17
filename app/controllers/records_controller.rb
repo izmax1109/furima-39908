@@ -13,7 +13,7 @@ class RecordsController < ApplicationController
       pay_item
       @record_address.save
 
-      if @item.records.present?
+      if @item.record.present?
         redirect_to root_path
         return # rubocop:disable Style/RedundantReturn
       end
