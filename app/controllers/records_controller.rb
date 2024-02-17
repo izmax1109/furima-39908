@@ -12,9 +12,10 @@ class RecordsController < ApplicationController
     if @record_address.valid?
       pay_item
       @record_address.save
-      unless @item.record.present?
+
+      if @item.records.present?
         redirect_to root_path
-        nil
+        return # rubocop:disable Style/RedundantReturn
       end
     else
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
@@ -48,7 +49,11 @@ class RecordsController < ApplicationController
 
   def check_login_and_item_owner
     if user_signed_in?
-      redirect_to root_path if current_user == @item.user
+      if @item.record.present?
+        redirect_to root_path
+      elsif current_user == @item.user
+        redirect_to root_path
+      end
     else
       redirect_to new_user_session_path
     end
